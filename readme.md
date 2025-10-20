@@ -1,6 +1,8 @@
 ### install package
-pip install -U langgraph-supervisor langchain-tavily langgraph 
 
+```
+pip install -U langgraph-supervisor langchain-tavily langgraph 
+```
 ### run the python file
 Every python file can be run by the following command:
 
