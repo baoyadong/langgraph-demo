@@ -5,8 +5,6 @@ from langgraph.prebuilt import create_react_agent
 from utils import pretty_print_messages
 from langgraph_supervisor import create_supervisor
 
-
-
 # gpt太卡
 # model=ChatOpenAI(model="gpt-4o", temperature=0)
 model=ChatOpenAI(
