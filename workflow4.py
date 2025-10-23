@@ -1,4 +1,4 @@
-# 编排器
+# 编排器 + 工作器模式
 # 此工作流非常适合那些无法预测所需子任务的复杂任务
 
 from langgraph.graph import StateGraph, START, END
@@ -75,7 +75,8 @@ def synthesizer(state: State):
     completed_report_sections = "\n\n---\n\n".join(completed_sections)
     return {"final_report": completed_report_sections}
 
-#Send, 它允许您动态创建工作器节点并将特定输入发送给每个节点;
+#Send, 它允许您动态创建工作器节点并将特定输入发送给每个节点; 
+#Send 接收节点名称和输入字典作为参数，并返回一个可用于调用工作节点的消息列表。
 def assign_worker(state: State):
     """Assigns a worker to each section of the report."""
     return [Send("llm_call", {"section": s}) for s in state["sections"]]
@@ -92,6 +93,7 @@ orchestrator_worker_builder.add_node("synthesizer", synthesizer)
 
 orchestrator_worker_builder.add_edge(START, "orchestrator")
 
+# 条件边缘、，根据 orchestrator 输出的 sections 列表，将每个 section 发送给 llm_call 节点
 orchestrator_worker_builder.add_conditional_edges("orchestrator", assign_worker, ["llm_call"])
 
 orchestrator_worker_builder.add_edge("llm_call", "synthesizer")
