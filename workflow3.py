@@ -1,3 +1,5 @@
+#routes the input to the appropriate node based on the user's request
+
 from langgraph.graph import StateGraph, START, END
 from langchain_openai import ChatOpenAI
 from typing_extensions import TypedDict
