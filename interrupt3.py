@@ -17,6 +17,7 @@ def step_1(state: State):
 
 def human_feedback(state: State):
   print("human feedback")
+  # feedback的值是从Command中的resume获取的
   feedback = interrupt("Please provide feedback of the user: ")
   print(f"User feedback: {feedback}")
   return {"user_feedback": feedback}
